@@ -1,0 +1,8 @@
+flask
+pymysql
+python-dotenv
+openai 
+fastapi 
+uvicorn  
+requests
+gradio
