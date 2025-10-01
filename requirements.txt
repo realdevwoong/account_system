@@ -6,3 +6,4 @@ fastapi
 uvicorn  
 requests
 gradio
+flask_bcrypt
