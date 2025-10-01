@@ -47,3 +47,30 @@ https://www.perplexity.ai/
 출처를 가지고 와줘 
 
 사진 찍어서 질문하기 
+CREATE TABLE login (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    address TEXT NOT NULL,
+    birthdate DATE NOT NULL
+);
+
+CREATE TABLE account (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    account_number VARCHAR(30) NOT NULL UNIQUE,
+    bank_name VARCHAR(50) NOT NULL,
+    balance DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    account_type VARCHAR(20) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    interest_rate DECIMAL(5,2) NOT NULL,
+    maturity_date DATE DEFAULT NULL,
+    product_name VARCHAR(100) DEFAULT NULL,
+    is_fixed_term TINYINT(1) DEFAULT 0,
+    monthly_limit DECIMAL(15,2) DEFAULT NULL,
+    auto_transfer TINYINT(1) DEFAULT 0,
+    note TEXT DEFAULT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES login(id)
+);
