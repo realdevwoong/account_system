@@ -1,0 +1,49 @@
+AI 에이전트 (AI Agents)
+인간의 개입없이 스스로 작업을 수행하고 의사결정을 내리는 것 
+Multimodal AI 
+텍스트, 이미지, 음성 등 여러 종류의 데이터를 동시에 이해하고 처리하는 AI 기술 
+
+
+AI개발에 유용한 사이트 
+번역
+https://www.deepl.com/en/translator
+모델 선정 및 튜닝 
+https://huggingface.co/
+ai 기반 검색엔진 
+https://www.genspark.ai/?utm_source=damoa.ai
+poe
+https://poe.com/
+notebookLM 
+https://notebooklm.google.com/notebook/33c750d3-6d32-4941-ba35-deb80c58be99
+
+
+프롬프트 가이드 
+https://www.promptingguide.ai/kr
+GCP 가이드 
+https://cloud.google.com/discover/what-is-prompt-engineering?hl=ko
+https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt
+https://platform.openai.com/docs/guides/prompt-engineering
+https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview
+https://docs.perplexity.ai/guides/prompt-guide
+
+핵심 ai 
+https://claude.ai/new
+https://aistudio.google.com/prompts/new_chat
+https://chatgpt.com/
+https://www.perplexity.ai/
+
+개발에 관련된 팁	 
+
+최소단위부터 시작하기
+
+계속 이상한 답을 할 경우 새 화면 만들기 
+
+자신에게 맞는 모델 설정하기 
+
+모든 코드는 basecode로 이해하고 시작하기 
+
+출처를 기반으로 설명해줘 
+
+출처를 가지고 와줘 
+
+사진 찍어서 질문하기 
