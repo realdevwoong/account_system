@@ -23,7 +23,7 @@ if "login_pw" not in st.session_state:
     st.session_state.login_pw = ""
 # 🔐 로그인 화면
 def show_login():
-    st.header("🔐 나만의 용돈관리 프로그램")
+    st.header("🔐 나만의 자산관리 프로그램")
     with st.form("login_form_main"):
         username = st.text_input("아이디", key="login_id")
         password = st.text_input("비밀번호", type="password", key="login_pw")
