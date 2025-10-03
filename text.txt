@@ -46,7 +46,27 @@ https://www.perplexity.ai/
 
 출처를 가지고 와줘 
 
-사진 찍어서 질문하기 
+사진 찍어서 질문하기
+ 
+-- 데이터베이스 생성
+CREATE DATABASE testdb;
+SHOW DATABASES;
+
+-- 사용자 생성
+CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'password123';
+SELECT user, host FROM mysql.user WHERE user='testuser';
+
+-- 권한 부여
+GRANT ALL PRIVILEGES ON testdb.* TO 'testuser'@'localhost'; 
+*.* 
+SHOW GRANTS FOR 'testuser'@'localhost';
+
+-- 권한 적용
+FLUSH PRIVILEGES;
+
+-- 테스트
+EXIT;
+
 CREATE TABLE login (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -74,3 +94,8 @@ CREATE TABLE account (
     note TEXT DEFAULT NULL,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES login(id)
 );
+
+DB_HOST = 
+DB_USER = 
+DB_PASSWORD= 
+DB_NAME = 
