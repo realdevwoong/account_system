@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+from datetime import date
 
 API_BASE = "http://127.0.0.1:5000"  # 필요한 경우 실제 서버 주소로 변경
 
@@ -9,17 +10,17 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "current_user" not in st.session_state:
     st.session_state.current_user = None
-if "register_mode" not in st.session_state:
+if "register_mode" not in st.session_state: # 회원가입 화면 여부
     st.session_state.register_mode = False
-if "user_id" not in st.session_state:
+if "user_id" not in st.session_state: # 로그인된 사용자의 고유 ID
     st.session_state.user_id = None
-if "accounts" not in st.session_state:
+if "accounts" not in st.session_state: # 계좌 정보 리스트
     st.session_state.accounts = []
-if "ai_mode" not in st.session_state:
+if "ai_mode" not in st.session_state:  # AI 챗봇 모드 여부
     st.session_state.ai_mode = False
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-if "login_pw" not in st.session_state:
+if "messages" not in st.session_state: # 챗봇 대화 메시지 기록
+    st.session_state.messages = [] 
+if "login_pw" not in st.session_state: # 로그인 시 사용한 비밀번호 (재요청에 사용)
     st.session_state.login_pw = ""
 # 🔐 로그인 화면
 def show_login():
@@ -29,7 +30,7 @@ def show_login():
         password = st.text_input("비밀번호", type="password", key="login_pw")
         col1, col2 = st.columns([1, 1])
         with col1:
-            login_btn = st.form_submit_button("로그인", use_container_width=True)
+            login_btn = st.form_submit_button("로그인", use_container_width=True) # 버튼이 화면 전체 폭을 차지
         with col2:
             join_btn = st.form_submit_button("회원가입", use_container_width=True)
 
@@ -49,7 +50,7 @@ def show_login():
                     st.session_state.user_id = data["user_id"]
                     st.session_state.accounts = data.get("accounts", [])
                     st.success("✅ 로그인 성공!")
-                    st.rerun()
+                    st.rerun() #새 상태를 반영해서 전체 앱이 다시 실행
                 else:
                     st.error("❌ 로그인 실패: 아이디 또는 비밀번호를 확인하세요.")
             except Exception as e:
@@ -69,8 +70,13 @@ def show_register():
         email = st.text_input("이메일")
         phone = st.text_input("전화번호")
         address = st.text_input("주소")
-        birthdate = st.date_input("생년월일")
-
+        # birthdate = st.date_input("생년월일")
+        birthdate = st.date_input(
+            "생년월일",
+            value=date(1990, 1, 1),          # 기본 표시 날짜(예시)
+            min_value=date(1900, 1, 1),      # 최소 선택 가능 날짜
+            max_value=date.today()           # 최대 선택 가능 날짜(오늘)
+        )
         col1, col2 = st.columns([1, 1])
         with col1:
             submit = st.form_submit_button("가입하기", use_container_width=True)
