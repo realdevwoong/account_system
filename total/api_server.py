@@ -218,7 +218,7 @@ def ask():
         for acc in accounts
     ])
 
-    response = requests.post("http://127.0.0.1:8001/ai", json={
+    response = requests.post("http://127.0.0.1:8000/ai", json={
         "message": user_message,
         "account_info": account_info
     })

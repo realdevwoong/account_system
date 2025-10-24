@@ -5,7 +5,6 @@ openai
 fastapi 
 uvicorn  
 requests
-gradio
 flask_bcrypt
 streamlit 
 cryptography

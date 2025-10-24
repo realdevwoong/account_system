@@ -250,7 +250,7 @@ def show_ai_chat():
                 st.markdown(
                       f"""
                       <div style='
-                          background-color:#D8F6CE;
+                          background-color:#2B2B2BE;
                           padding:10px;
                           border-radius:8px;
                           margin-bottom:10px;

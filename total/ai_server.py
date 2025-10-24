@@ -28,7 +28,7 @@ def get_ai_response(payload: AIPayload):
 """
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-5",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": payload.message}
