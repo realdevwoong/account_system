@@ -1,0 +1,66 @@
+# 2. MySQL 서버 설치
+sudo apt install mysql-server -y
+
+# 3. MySQL 서비스 시작
+sudo systemctl start mysql
+
+# 4. 부팅 시 자동 실행 설정
+sudo systemctl enable mysql
+
+# 5. MySQL 서비스 상태 확인
+systemctl status mysql
+
+CREATE DATABASE testdb;
+SHOW DATABASES;
+
+-- 사용자 생성
+CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'password123';
+SELECT user, host FROM mysql.user WHERE user='testuser';
+
+-- 권한 부여
+GRANT ALL PRIVILEGES ON testdb.* TO 'testuser'@'localhost'; 
+*.* 
+SHOW GRANTS FOR 'testuser'@'localhost';
+
+-- 권한 적용
+FLUSH PRIVILEGES;
+
+-- 테스트
+EXIT;
+
+DB_HOST=db
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+
+OPENAI_API_KEY=
+
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+ sudo systemctl status docker
+
+ sudo systemctl start docker
+
+sudo apt-get install docker-compose
+
+sudo usermod -aG docker $USER
+
+docker-compose version
+docker-compose up --build
+
+
+
+
