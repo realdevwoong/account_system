@@ -12,7 +12,7 @@ app.secret_key = os.urandom(24)
 bcrypt = Bcrypt(app)
 
 AI_ENDPOINT = os.getenv("AI_ENDPOINT", "http://aiserver:8000/ai")
-AI_TIMEOUT = int(os.getenv("AI_TIMEOUT", "60"))  # 초
+AI_TIMEOUT = 60 
 
 # -----------------------------------------------------------
 # 유틸
