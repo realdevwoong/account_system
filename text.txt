@@ -47,7 +47,9 @@ https://www.perplexity.ai/
 출처를 가지고 와줘 
 
 사진 찍어서 질문하기
- 
+DROP DATABASE testdb;
+DROP USER 'testuser'@'localhost';
+
 -- 데이터베이스 생성
 CREATE DATABASE testdb;
 SHOW DATABASES;
