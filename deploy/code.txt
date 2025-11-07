@@ -10,17 +10,17 @@ sudo systemctl enable mysql
 # 5. MySQL 서비스 상태 확인
 systemctl status mysql
 
-CREATE DATABASE testdb;
+CREATE DATABASE my_database;
 SHOW DATABASES;
 
 -- 사용자 생성
-CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'password123';
-SELECT user, host FROM mysql.user WHERE user='testuser';
+CREATE USER 'aidevwoong'@'localhost' IDENTIFIED BY 'aidevwoong';
+SELECT user, host FROM mysql.user WHERE user='aidevwoong';
 
 -- 권한 부여
-GRANT ALL PRIVILEGES ON testdb.* TO 'testuser'@'localhost'; 
+GRANT ALL PRIVILEGES ON testdb.* TO 'aidevwoong'@'localhost'; 
 *.* 
-SHOW GRANTS FOR 'testuser'@'localhost';
+SHOW GRANTS FOR 'aidevwoong'@'localhost';
 
 -- 권한 적용
 FLUSH PRIVILEGES;
@@ -28,7 +28,7 @@ FLUSH PRIVILEGES;
 -- 테스트
 EXIT;
 
-DB_HOST=db
+DB_HOST=
 DB_USER=
 DB_PASSWORD=
 DB_NAME=
@@ -48,6 +48,8 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo apt-get update
 
  sudo systemctl status docker
@@ -69,7 +71,16 @@ sudo systemctl disable nginx
 
 sudo lsof -i :80
 
+docker build -t ai-server -f Dockerfile.ai .
+docker run -d -p 8000:8000 ai-server
 
+docker build -t api-server -f Dockerfile.api .
+docker run -d -p 8001:5000 api-server
+
+docker build -t ui-server -f Dockerfile.ui .
+docker run -d -p 8501:8501 ui-server
+docker run -d -p 3307:3306 mysql:8.0
+docker images
 server {
     listen 80;
     server_name localhost;
