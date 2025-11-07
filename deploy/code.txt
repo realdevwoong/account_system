@@ -24,7 +24,33 @@ SHOW GRANTS FOR 'aidevwoong'@'localhost';
 
 -- 권한 적용
 FLUSH PRIVILEGES;
+CREATE TABLE login (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    address TEXT NOT NULL,
+    birthdate DATE NOT NULL
+);
 
+CREATE TABLE account (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    account_number VARCHAR(30) NOT NULL UNIQUE,
+    bank_name VARCHAR(50) NOT NULL,
+    balance DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    account_type VARCHAR(20) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    interest_rate DECIMAL(5,2) NOT NULL,
+    maturity_date DATE DEFAULT NULL,
+    product_name VARCHAR(100) DEFAULT NULL,
+    is_fixed_term TINYINT(1) DEFAULT 0,
+    monthly_limit DECIMAL(15,2) DEFAULT NULL,
+    auto_transfer TINYINT(1) DEFAULT 0,
+    note TEXT DEFAULT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES login(id)
+);
 -- 테스트
 EXIT;
 
@@ -65,7 +91,7 @@ docker-compose version
 docker-compose up --build
 
 sudo apt install nginx -y
-sudo systemctl start ngnix
+sudo systemctl start nginx
 sudo systemctl stop nginx
 sudo systemctl disable nginx
 
@@ -80,6 +106,41 @@ docker run -d -p 8001:5000 api-server
 docker build -t ui-server -f Dockerfile.ui .
 docker run -d -p 8501:8501 ui-server
 docker run -d -p 3307:3306 mysql:8.0
+
+docker network create mynet
+docker run -d \
+  --name aiserver \
+  --network mynet \
+  -p 8000:8000 \
+  ai-server
+ docker run -d \
+  --name apiserver \
+  --network mynet \
+  -p 8001:5000 \
+  api-server
+docker run -d \
+  --name uiserver \
+  --network mynet \
+  -p 8501:8501 \
+  ui-server 
+docker run -d \
+  --name db \
+  --network mynet \
+  -e MYSQL_DATABASE=my_database \
+  -e MYSQL_USER=aidevwoong \
+  -e MYSQL_PASSWORD=aidevwoong \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -p 3307:3306 \
+  mysql:8.0 \
+  --default-authentication-plugin=mysql_native_password \
+  --character-set-server=utf8mb4 \
+  --collation-server=utf8mb4_unicode_ci
+
+docker stop db uiserver apiserver aiserver
+
+docker rm db uiserver apiserver aiserver
+
+mysql -h 127.0.0.1 -P 3307 -u root -p
 docker images
 server {
     listen 80;
@@ -97,7 +158,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
-
+docker build -t ai-server -f Dockerfile.ai .
     # API
     location /api/ {
         proxy_pass http://apiserver:5000/;
