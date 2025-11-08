@@ -135,36 +135,7 @@ def get_accounts():
             accounts = cursor.fetchall()
 
     return jsonify({"accounts": accounts}), 200
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
 
-#         conn = get_connection()
-#         try:
-#             with conn.cursor() as cursor:
-#                 cursor.execute("SELECT * FROM login WHERE username=%s", (username,))
-#                 user = cursor.fetchone()
-#                 if user and check_password_hash(user["password"], password):
-#                     session['user_id'] = user['id']
-#                     return redirect(url_for('my_accounts'))
-#                 else:
-#                     return '''
-#                         <h2>❌ 로그인 실패</h2>
-#                         <p>아이디 또는 비밀번호가 올바르지 않습니다. <a href="/login">다시 로그인</a></p>
-#                     '''
-#         finally:
-#             conn.close()
-
-#     return '''
-#         <h2>🔐 로그인</h2>
-#         <form method="post">
-#             아이디: <input type="text" name="username"><br>
-#             비밀번호: <input type="password" name="password"><br>
-#             <input type="submit" value="로그인">
-#         </form>
-#     '''
 
 @app.route('/accounts')
 def my_accounts():
