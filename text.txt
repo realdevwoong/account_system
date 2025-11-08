@@ -101,3 +101,55 @@ DB_HOST =
 DB_USER = 
 DB_PASSWORD= 
 DB_NAME = 
+
+
+curl -X POST http://127.0.0.1:5000/api/add_account \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "account_number": "110-123-456789",
+    "bank_name": "국민은행",
+    "balance": 5000000,
+    "account_type": "적금",
+    "interest_rate": 3.2,
+    "maturity_date": "2026-05-31",
+    "product_name": "KB행복적금",
+    "is_fixed_term": true,
+    "monthly_limit": 500000,
+    "auto_transfer": false,
+    "note": "자동이체 미설정"
+  }'
+  
+  curl -X POST http://127.0.0.1:5000/api/add_account \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "account_number": "1002-444-888888",
+    "bank_name": "우리은행",
+    "balance": 7800000,
+    "account_type": "적금",
+    "interest_rate": 3.5,
+    "maturity_date": "2025-12-30",
+    "product_name": "우리플러스적금",
+    "is_fixed_term": true,
+    "monthly_limit": 700000,
+    "auto_transfer": false,
+    "note": "일반 적금"
+  }'
+  
+  curl -X POST http://127.0.0.1:5000/api/add_account \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "account_number": "302-9876-543210",
+    "bank_name": "농협은행",
+    "balance": 12300000,
+    "account_type": "예금",
+    "interest_rate": 2.8,
+    "maturity_date": "2027-01-15",
+    "product_name": "NH청년드림예금",
+    "is_fixed_term": true,
+    "monthly_limit": 1000000,
+    "auto_transfer": false,
+    "note": "장기 저축 목적"
+  }'
